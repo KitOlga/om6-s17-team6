@@ -43,11 +43,27 @@ def book_info(request, book_id):
 
 
 def add_book(request, author_id):
-    pass
+    if request.method == 'POST':
+        fm = BookForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            return redirect('main')
+    fm = BookForm()
+    return render(request, 'book_form.html', context={'form': fm, 'function_name': 'Adding'})
 
 
 def edit_book(request, book_id):
-    pass
+    book_instance = Book.get_by_id(book_id)
+    if request.method == 'POST':
+        fm = BookForm(request.POST, instance=book_instance)
+        if fm.is_valid:
+            name, description, count = fm.cleaned_data['name'], fm.cleaned_data['description'], \
+                                       fm.cleaned_data['count']
+            book_instance.update(name, description, count)
+            return redirect('main')
+
+    fm = BookForm()
+    return render(request, 'book_form.html', context={'form': fm, 'function_name': 'Editing'})
 
 
 def delete_book(request, book_id):

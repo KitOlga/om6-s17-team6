@@ -17,11 +17,27 @@ def author_info(request, author_id):
 
 
 def add_author(request):
-    pass
+    if request.method == 'POST':
+        fm = AuthorForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            return redirect('main')
+    fm = AuthorForm()
+    return render(request, 'author_form.html', context={'form': fm, 'function_name': 'Adding'})
 
 
 def edit_author(request, author_id):
-    pass
+    book_instance = Author.get_by_id(author_id)
+    if request.method == 'POST':
+        fm = AuthorForm(request.POST, instance=book_instance)
+        if fm.is_valid:
+            name, surname, patronymic = fm.cleaned_data['name'], fm.cleaned_data['surname'], \
+                                       fm.cleaned_data['patronymic']
+            book_instance.update(name, surname, patronymic)
+            return redirect('main')
+
+    fm = AuthorForm()
+    return render(request, 'author_form.html', context={'form': fm, 'function_name': 'Editing'})
 
 
 def delete_author(request, author_id):
