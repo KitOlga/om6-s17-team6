@@ -7,7 +7,10 @@ class AuthorsListSerializer(serializers.ModelSerializer):
         model = Author
         fields = ('url', 'name', 'surname')
 
+
 class AuthorDetailSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+
     class Meta:
         model = Author
         fields = '__all__'
