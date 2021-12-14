@@ -8,5 +8,5 @@ urlpatterns = [
     path('delete/<int:author_id>', views.delete_author, name='delete author'),
     path('api/v1/create', views.AuthorCreateView.as_view()),
     path('api/v1/all', views.AuthorsListView.as_view()),
-    path('api/v1/author/<int:pk>', views.AuthorDetailView.as_view()),
+    path('api/v1/author/<int:pk>', views.AuthorDetailView.as_view(), name="author-detail"),
 ]
