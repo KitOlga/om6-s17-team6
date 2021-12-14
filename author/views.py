@@ -48,6 +48,7 @@ def delete_author(request, author_id):
     return redirect('main')
 
 
+#api functionality
 class AuthorCreateView(generics.CreateAPIView):
     serializer_class = AuthorDetailSerializer
 
