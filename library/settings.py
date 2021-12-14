@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'author',
     'book',
     'order',
-    'crispy_forms'
+    'crispy_forms',
+    'rest_framework',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
