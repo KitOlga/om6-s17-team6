@@ -51,9 +51,11 @@ def delete_author(request, author_id):
 class AuthorCreateView(generics.CreateAPIView):
     serializer_class = AuthorDetailSerializer
 
+
 class AuthorsListView(generics.ListAPIView):
     serializer_class = AuthorsListSerializer
     queryset = Author.objects.all()
+
 
 class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = AuthorDetailSerializer
