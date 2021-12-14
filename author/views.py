@@ -5,6 +5,8 @@ from author.models import Author
 from book.models import Book
 from order.models import Order
 from .forms import AuthorForm
+from rest_framework import generics
+from .serializers import AuthorDetailSerializer, AuthorsListSerializer
 
 TEMPLATE_DIRS = 'os.path.join(BASE_DIR,"templates")'
 
@@ -44,3 +46,18 @@ def delete_author(request, author_id):
     author = Author.objects.get(pk=author_id)
     author.delete()
     return redirect('main')
+
+
+#api functionality
+class AuthorCreateView(generics.CreateAPIView):
+    serializer_class = AuthorDetailSerializer
+
+
+class AuthorsListView(generics.ListAPIView):
+    serializer_class = AuthorsListSerializer
+    queryset = Author.objects.all()
+
+
+class AuthorDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = AuthorDetailSerializer
+    queryset = Author.objects.all()
